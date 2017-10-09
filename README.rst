@@ -15,9 +15,9 @@ A 3D cell-based Voronoi library based on voro++
 
 This library includes Python bindings, using Cython.
 
-`Code available`_ on Github.
+Original `Code available`_ on Github.
 
-`Documentation available`_ at Read the Docs. 
+Original `Documentation available`_ at Read the Docs. 
 
 .. _Code available: https://github.com/wackywendell/tess
 
@@ -29,7 +29,9 @@ Description
 Tess is a library to calculate Voronoi (and Laguerre) tessellations in 3D and analyze their
 structure. The tessellation is calculated as a list of :class:`~tess.Cell` objects, each of which
 can give information on its volume, centroid, number of faces, surface area, etc. The library is 
-made with packings of spherical particles in mind, possibly with variable sizes. 
+made with packings of spherical particles in mind, possibly with variable sizes.
+
+This fork fixes the id assignation for each particle.
 
 voro++
 ~~~~~~
@@ -56,7 +58,7 @@ To install, use ``pip`` (or ``easy_install``)::
 
 Or to install from Github_::
     
-    pip install --user git+git://github.com/wackywendell/tess@master
+    pip install --user git+git://github.com/asazo/tess@master
     
 .. _github: https://www.github.com/wackywendell/tess
 
