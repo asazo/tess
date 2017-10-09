@@ -273,9 +273,10 @@ cdef class ContainerPoly:
         cell = Cell()
 
         cdef int vcells_left = self.thisptr.total_particles()
+        cdef int i = 0
         cdef int id
 
-        #mylist = [None for _ in range(vcells_left)]
+        mylist = [None for _ in range(vcells_left)]
 
         if not vl.start():
             del vl
@@ -287,10 +288,10 @@ cdef class ContainerPoly:
                 assert cell._id < self.thisptr.total_particles(), (
                     "Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
                 #mylist[cell._id] = cell
-                mylist.append(cell)
-
+                mylist[i] = cell
                 vcells_left -= 1
                 cell = Cell()
+                i += 1
             if not vl.inc(): break
 
         del vl
