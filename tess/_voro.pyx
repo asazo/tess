@@ -236,7 +236,7 @@ cdef class Container:
             if(self.thisptr.compute_cell(dereference(cell.thisptr), dereference(vl))):
                 cell._id = vl.pid()
                 assert cell._id < self.thisptr.total_particles(), (
-                    "Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
+                    "Container: Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
 
                 vl.pos(cell.x,cell.y,cell.z)
                 cell.r = 0
@@ -286,7 +286,7 @@ cdef class ContainerPoly:
             if(self.thisptr.compute_cell(dereference(cell.thisptr), dereference(vl))):
                 vl.pos(cell._id, cell.x,cell.y,cell.z,cell.r)
                 assert cell._id < self.thisptr.total_particles(), (
-                    "Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
+                    "ContainerPoly: Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
                 #mylist[cell._id] = cell
                 mylist[i] = cell
                 vcells_left -= 1
