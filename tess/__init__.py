@@ -47,6 +47,7 @@ class Container(list):
         Periodicity of the x, y, and z walls
     radii : iterable of `float`, optional
         for unequally sized particles, for generating a Laguerre transformation.
+    ids : List of unique ids for each particle. If none, correlative indices are given.
 
     Returns
     -------
@@ -73,7 +74,7 @@ class Container(list):
         R_{j}^{2}\forall j\neq i
     """
 
-    def __init__(self, points, limits=1.0, periodic=False, radii=None, blocks=None):
+    def __init__(self, points, limits=1.0, periodic=False, radii=None, blocks=None, ids=None):
         """Get the voronoi cells for a given set of points."""
         # make px, py, pz from periodic, whether periodic is a 3-tuple or bool
         try:
@@ -139,6 +140,9 @@ class Container(list):
         # voro has two types: Container and ContainerPoly. ContainerPoly is for unequal radii,
         # Container is for no-radii.
         # Now we choose the right one.
+        if ids is None:
+            ids = range(len(points))
+
         if radii is not None:
             assert(len(radii) == len(points))
             self._container = _ContainerPoly(lx0,lx, ly0,ly, lz0,lz, # limits
@@ -146,7 +150,8 @@ class Container(list):
                                 px, py, pz,        # periodicity
                                 len(points))
 
-            for n,(x,y,z),r in zip(range(len(points)), points, radii):
+            #for n,(x,y,z),r in zip(range(len(points)), points, radii):
+            for n,(x,y,z),r in zip(ids, points, radii):
                 try:
                     rx, ry, rz = roundedoff(x,lx0,Lx,px), roundedoff(y,ly0,Ly,py), roundedoff(z,lz0,Lz,pz)
                     self._container.put(n, rx, ry, rz, r)
@@ -160,7 +165,8 @@ class Container(list):
                                     bx, by, bz,        # block size
                                     px, py, pz,        # periodicity
                                     len(points))
-            for n,(x,y,z) in enumerate(points):
+            #for n,(x,y,z) in enumerate(points):
+            for n,(x,y,z) in zip(ids, points):
                 rx, ry, rz = roundedoff(x,lx0,Lx,px), roundedoff(y,ly0,Ly,py), roundedoff(z,lz0,Lz,pz)
                 try:
                     self._container.put(n, rx, ry, rz)
