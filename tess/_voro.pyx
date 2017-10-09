@@ -285,8 +285,8 @@ cdef class ContainerPoly:
         while True:
             if(self.thisptr.compute_cell(dereference(cell.thisptr), dereference(vl))):
                 vl.pos(cell._id, cell.x,cell.y,cell.z,cell.r)
-                assert cell._id < self.thisptr.total_particles(), (
-                    "ContainerPoly: Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
+                #assert cell._id < self.thisptr.total_particles(), (
+                    #"ContainerPoly: Cell id %s larger than total %s" % (cell._id, self.thisptr.total_particles()))
                 #mylist[cell._id] = cell
                 mylist[i] = cell
                 vcells_left -= 1
